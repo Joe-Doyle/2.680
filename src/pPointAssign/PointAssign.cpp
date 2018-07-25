@@ -1,11 +1,13 @@
 /************************************************************/
-/*    NAME: Joe Doyle                                              */
+/*    NAME: Joe Doyle                                       */
 /*    ORGN: MIT                                             */
-/*    FILE: PointAssign.cpp                                        */
+/*    FILE: PointAssign.cpp                                 */
 /*    DATE:                                                 */
 /************************************************************/
 
 #include <iterator>
+#include <string>
+#include <vector>
 #include "MBUtils.h"
 #include "PointAssign.h"
 
@@ -34,17 +36,23 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
    
   for(p=NewMail.begin(); p!=NewMail.end(); p++) {
     CMOOSMsg &msg = *p;
+    string sval  = msg.GetString(); 
+    string key = msg.GetKey();
 
 #if 0 // Keep these around just for template
-    string key   = msg.GetKey();
     string comm  = msg.GetCommunity();
     double dval  = msg.GetDouble();
-    string sval  = msg.GetString(); 
     string msrc  = msg.GetSource();
     double mtime = msg.GetTime();
     bool   mdbl  = msg.IsDouble();
     bool   mstr  = msg.IsString();
 #endif
+
+    if (key == "VISIT_POINT"){
+      m_input.push_back(sval);
+      Notify("IN_MAIL", m_input.back()); 
+    }
+
    }
 	
    return(true);
@@ -70,6 +78,8 @@ bool PointAssign::OnConnectToServer()
 
 bool PointAssign::Iterate()
 {
+  Notify("TEST", "good");
+
   return(true);
 }
 
@@ -107,5 +117,6 @@ bool PointAssign::OnStartUp()
 void PointAssign::RegisterVariables()
 {
   // Register("FOOBAR", 0);
+  Register("VISIT_POINT", 0);
 }
 

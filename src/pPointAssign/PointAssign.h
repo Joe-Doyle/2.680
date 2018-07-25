@@ -1,25 +1,18 @@
 /************************************************************/
-/*    NAME: Joe Doyle                                       */
+/*    NAME: Joe Doyle                                              */
 /*    ORGN: MIT                                             */
-/*    FILE: PointAssign.h                                   */
-/*    DATE: 7/23/18                                         */
+/*    FILE: PointAssign.h                                          */
+/*    DATE:                                                 */
 /************************************************************/
-
-#include <iterator>
-#include <string>
-#include <vector>
-#include <MBUtils.h>
 
 #ifndef PointAssign_HEADER
 #define PointAssign_HEADER
-
-
 
 #include "MOOS/libMOOS/MOOSLib.h"
 
 using namespace std;
 
-class PointAssign : public AppCastingMOOSApp
+class PointAssign : public CMOOSApp
 {
  public:
    PointAssign();
@@ -30,10 +23,10 @@ class PointAssign : public AppCastingMOOSApp
    bool Iterate();
    bool OnConnectToServer();
    bool OnStartUp();
-   bool buildReport();
 
  protected:
    void RegisterVariables();
+   vector<string> m_input;
 
  private: // Configuration variables
 

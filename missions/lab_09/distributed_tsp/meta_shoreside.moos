@@ -25,7 +25,7 @@ Processconfig = ANTLER
 #include plug_pShare.moos
 #include plug_pHostInfo.moos
 #include plug_pLogger.moos
-#include plug_pLogger.moos
+#include plug_uTimerScript.moos
 
 //-------------------------------------------------------
 // pPointAssign Configuration Block
@@ -42,13 +42,16 @@ ProcessConfig = uFldShoreBroker
   AppTick       = 1
   CommsTick     = 1
 
-  QBRIDGE  = DEPLOY, NODE_REPORT
-  QBRIDGE  = STATION_KEEP, APPCAST_REQ
-  QBRIDGE  = MOOS_MANUAL_OVERRIDE
+  QBRIDGE = DEPLOY, NODE_REPORT
+  QBRIDGE = STATION_KEEP, APPCAST_REQ
+  QBRIDGE = MOOS_MANUAL_OVERRIDE
+  QBRIDGE = LOITER
+  QBRIDGE = VISIT_POINT
 
-  BRIDGE   = src=RETURN_ALL, alias=RETURN
-  BRIDGE   = src=RETURN_$V,  alias=RETURN
-	BRIDGE	 = src=REFUEL_NEEDED_ALL, alias=RETURN
+
+  BRIDGE  = src=RETURN_ALL, alias=RETURN
+  BRIDGE  = src=RETURN_$V,  alias=RETURN
+  BRIDGE  = src=REFUEL_NEEDED_ALL, alias=RETURN
 }
 
 //--------------------------------------------------------
@@ -77,11 +80,11 @@ ProcessConfig = pMarineViewer
   BUTTON_ONE   = DEPLOY  # DEPLOY_ALL=true 
   BUTTON_ONE   = MOOS_MANUAL_OVERRIDE_ALL=false 
   BUTTON_ONE   = RETURN_ALL=false # STATION_KEEP_ALL=false
+  BUTTON_ONE   = POINT_ALL=true
 
   BUTTON_TWO   = RETURN  # RETURN_ALL=true
-  BUTTON_TWO   = STATION_KEEP_ALL=false
+  BUTTON_TWO   = STATION_KEEP_ALL=false # LOITER ALL=false
 
   BUTTON_THREE = STATION  # STATION_KEEP_ALL=true
-
-	BUTTON_FOUR  = REFUEL # REFUEL_NEEDED_ALL=true
+  BUTTON_THREE = LOITER_ALL=false # RETURN_ALL=false
 }
