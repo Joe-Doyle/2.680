@@ -34,8 +34,6 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
 {
   //AppCastingMOOSApp::OnNewMail(NewMail);
 
-  Notify("TEST", "test");
-
   MOOSMSG_LIST::iterator p;
    
   for(p=NewMail.begin(); p!=NewMail.end(); p++) {

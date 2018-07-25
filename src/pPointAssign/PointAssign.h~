@@ -1,7 +1,7 @@
 /************************************************************/
-/*    NAME: Joe Doyle                                       */
+/*    NAME: Joe Doyle                                              */
 /*    ORGN: MIT                                             */
-/*    FILE: PointAssign.h                                   */
+/*    FILE: PointAssign.h                                          */
 /*    DATE:                                                 */
 /************************************************************/
 
@@ -9,7 +9,6 @@
 #define PointAssign_HEADER
 
 #include "MOOS/libMOOS/MOOSLib.h"
-#include "MOOS/libMOOS/Thirdparty/AppCasting/AppCastingMOOSApp.h"
 
 using namespace std;
 
