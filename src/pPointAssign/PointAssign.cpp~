@@ -2,7 +2,7 @@
 /*    NAME: Joe Doyle                                       */
 /*    ORGN: MIT                                             */
 /*    FILE: PointAssign.cpp                                 */
-/*    DATE:                                                 */
+/*    DATE: 7/25/18                                         */
 /************************************************************/
 
 #include <iterator>
@@ -33,6 +33,8 @@ PointAssign::~PointAssign()
 bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
 {
   //AppCastingMOOSApp::OnNewMail(NewMail);
+
+  Notify("TEST", "test");
 
   MOOSMSG_LIST::iterator p;
    
@@ -82,7 +84,7 @@ bool PointAssign::Iterate()
 {
   //AppCastingMOOSApp::Iterate();
 
-  Notify("TEST", "good");
+  //Notify("TEST", "good");
 
   //AppCastingMOOSApp::PostReport();
 

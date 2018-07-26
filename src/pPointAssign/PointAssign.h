@@ -30,6 +30,8 @@ class PointAssign : public CMOOSApp
    vector<string> m_input;
 
  private: // Configuration variables
+   int num = 0;
+
 
  private: // State variables
 };

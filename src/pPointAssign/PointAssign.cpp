@@ -2,7 +2,7 @@
 /*    NAME: Joe Doyle                                       */
 /*    ORGN: MIT                                             */
 /*    FILE: PointAssign.cpp                                 */
-/*    DATE:                                                 */
+/*    DATE: 7/25/18                                         */
 /************************************************************/
 
 #include <iterator>
@@ -18,6 +18,7 @@ using namespace std;
 
 PointAssign::PointAssign()
 {
+  int num = 0;
 }
 
 //---------------------------------------------------------
@@ -53,7 +54,16 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
 #endif
 
     if (key == "VISIT_POINT"){
-      m_input.push_back(sval);
+      if (!num){
+	Notify("VISIT_POINT_HENRY", "firstpoint");
+	Notify("VISIT_POINT_GILDA", "firstpoint");
+      }
+      else if (!(num % 2)){
+	Notify("VISIT_POINT_HENRY", sval);
+      }
+      else if (num % 2){
+	Notify("VISIT_POINT_GILDA", sval);
+      }
       Notify("IN_MAIL", m_input.back()); 
     }
 
@@ -84,7 +94,7 @@ bool PointAssign::Iterate()
 {
   //AppCastingMOOSApp::Iterate();
 
-  Notify("TEST", "good");
+  //Notify("TEST", "good");
 
   //AppCastingMOOSApp::PostReport();
 
