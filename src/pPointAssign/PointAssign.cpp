@@ -13,12 +13,17 @@
 
 using namespace std;
 
+int m_point_count = 0;
+bool REGIONAL_DISTRO = false;
+bool m_distributed = false;
+
+
 //---------------------------------------------------------
 // Constructor
 
 PointAssign::PointAssign()
 {
-  int num = 0;
+
 }
 
 //---------------------------------------------------------
@@ -35,11 +40,10 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
 {
   //AppCastingMOOSApp::OnNewMail(NewMail);
 
-  Notify("TEST", "test");
-
   MOOSMSG_LIST::iterator p;
    
   for(p=NewMail.begin(); p!=NewMail.end(); p++) {
+    Notify("DEBUG", "OnNewMail begin");
     CMOOSMsg &msg = *p;
     string sval  = msg.GetString(); 
     string key = msg.GetKey();
@@ -54,24 +58,14 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
 #endif
 
     if (key == "VISIT_POINT"){
-      if (!num){
-	Notify("VISIT_POINT_HENRY", "firstpoint");
-	Notify("VISIT_POINT_GILDA", "firstpoint");
-      }
-      else if (!(num % 2)){
-	Notify("VISIT_POINT_HENRY", sval);
-      }
-      else if (num % 2){
-	Notify("VISIT_POINT_GILDA", sval);
-      }
-      Notify("IN_MAIL", m_input.back()); 
+      m_point_count++;
+      m_input.push_back(sval);
+      Notify("DEBUG", m_input.back());
     }
-
-   }
-	
-   return(true);
+  }
+  return(true);
 }
-
+      
 //---------------------------------------------------------
 // Procedure: OnConnectToServer
 
@@ -98,6 +92,32 @@ bool PointAssign::Iterate()
 
   //AppCastingMOOSApp::PostReport();
 
+  if(REGIONAL_DISTRO){
+  }
+  else if(m_point_count >= 101 && !m_distributed){
+    for(int i=0; i<102; i++){
+      if(i == 0){
+	Notify("VISIT_POINT_HENRY", m_input[i]);
+	Notify("VISIT_POINT_GILDA", m_input[i]);
+	Notify("DEBUG", "first points notified");
+      }
+      else if(i < 101){
+	if(i % 2){
+	  Notify("VISIT_POINT_HENRY", m_input[i]);
+	}
+	else{
+	  Notify("VISIT_POINT_GILDA", m_input[i]);
+	}
+      }
+      else{
+	Notify("VISIT_POINT_HENRY", m_input[i]);
+	Notify("VISIT_POINT_GILDA", m_input[i]);
+	Notify("DEBUG", "last points notified");
+      }
+    }
+    m_distributed = true;
+  }	
+  
   return(true);
 }
 
@@ -127,7 +147,8 @@ bool PointAssign::OnStartUp()
     }
   }
   
-  RegisterVariables();	
+  RegisterVariables();
+  Notify("UTS_PAUSE", "false");
   return(true);
 }
 

@@ -11,3 +11,4 @@ find . -name '*.moos++'  -print -exec rm -rfv {} \;
 
 find . -name 'MOOSLog*'  -print -exec rm -rfv {} \;
 
+find . -name 'LOG_*' -print -exec rm -rfv {} \;
