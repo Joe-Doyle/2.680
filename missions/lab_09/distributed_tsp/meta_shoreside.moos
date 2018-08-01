@@ -15,6 +15,7 @@ Processconfig = ANTLER
   Run = MOOSDB          @ NewConsole = false
   Run = pMarineViewer   @ NewConsole = false
   Run = pLogger         @ NewConsole = false
+  //Run = pRelayer	@ NewConsole = false
   Run = pShare          @ NewConsole = false
   Run = pHostInfo       @ NewConsole = false
   Run = uFldShoreBroker @ NewConsole = false
@@ -31,6 +32,8 @@ Processconfig = ANTLER
 // pPointAssign Configuration Block
 ProcessConfig = pPointAssign
 {
+  AppTick = 3
+  CommsTick = 3
   arrange_by_region = false
 }
 
@@ -46,12 +49,15 @@ ProcessConfig = uFldShoreBroker
   QBRIDGE = STATION_KEEP, APPCAST_REQ
   QBRIDGE = MOOS_MANUAL_OVERRIDE
   QBRIDGE = LOITER
-  QBRIDGE = VISIT_POINT
+  QBRIDGE = VISITING
+  QBRIDGE = RETURN
 
-
-  BRIDGE  = src=RETURN_ALL, alias=RETURN
+  //BRIDGE  = src=RETURN_ALL, alias=RETURN
   BRIDGE  = src=RETURN_$V,  alias=RETURN
   BRIDGE  = src=REFUEL_NEEDED_ALL, alias=RETURN
+  BRIDGE  = src=VISIT_POINT_GILDA, alias=VISIT_POINT
+  BRIDGE  = src=TEST_POINT, alias=TEST_POINT
+  BRIDGE  = src=DEBUG, alias=DEBUG
 }
 
 //--------------------------------------------------------

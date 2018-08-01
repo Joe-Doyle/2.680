@@ -1,0 +1,6 @@
+vector::iterator<string> iter;                                                                                       │key=VISIT_POINTsval=x=32.42,y=-81.13,id=75
+  iter = m_input.end();                                                                                                │key=VISIT_POINTsval=x=-5.672,y=-105.505,id=76
+                                                                                                                       │key=VISIT_POINTsval=x=183.8,y=-115.015,id=77
+  if (iter == "lastpoint")                                                                                             │key=VISIT_POINTsval=x=26.255,y=-135.91,id=78
+    for (iter = m_input.begin(), int i=0; iter != m_input.end(); iter++, i++)                                          │key=VISIT_POINTsval=x=19.123,y=-42.235,id=79
+      cout << "m_input[" << i << "]=" << iter << endl; 

@@ -1,0 +1,9 @@
+//------------------------------------------------
+// pRelayer config block
+
+ProcessConfig = pRelayer
+{
+   AppTick   = 4
+   CommsTick = 4
+}
+

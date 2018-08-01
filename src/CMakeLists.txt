@@ -21,6 +21,8 @@ ADD_SUBDIRECTORY(pPrimeFactor)
 #ADD_SUBDIRECTORY(pFoobar)
 ADD_SUBDIRECTORY(pOdometry)
 ADD_SUBDIRECTORY(pPointAssign)
+ADD_SUBDIRECTORY(pFaker)
+ADD_SUBDIRECTORY(pRelayer)
 ##############################################################################
 #                           END of CMakeLists.txt
 ##############################################################################

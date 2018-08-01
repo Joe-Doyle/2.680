@@ -1,53 +1,41 @@
 /************************************************************/
-/*    NAME: Joe Doyle                                       */
+/*    NAME: Joe Doyle                                              */
 /*    ORGN: MIT                                             */
-/*    FILE: PointAssign.cpp                                 */
-/*    DATE: 7/25/18                                         */
+/*    FILE: Relayer.cpp                                        */
+/*    DATE:                                                 */
 /************************************************************/
 
 #include <iterator>
-#include <string>
-#include <vector>
 #include "MBUtils.h"
-#include "PointAssign.h"
-#include <unistd.h>
+#include "Relayer.h"
 
 using namespace std;
-
-int m_point_count = 0;
-bool REGIONAL_DISTRO = false;
-bool m_distributed = false;
-
 
 //---------------------------------------------------------
 // Constructor
 
-PointAssign::PointAssign()
+Relayer::Relayer()
 {
-
 }
 
 //---------------------------------------------------------
 // Destructor
 
-PointAssign::~PointAssign()
+Relayer::~Relayer()
 {
 }
 
 //---------------------------------------------------------
 // Procedure: OnNewMail
-bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
-{
-  //AppCastingMOOSApp::OnNewMail(NewMail);
 
+bool Relayer::OnNewMail(MOOSMSG_LIST &NewMail)
+{
   MOOSMSG_LIST::iterator p;
    
   for(p=NewMail.begin(); p!=NewMail.end(); p++) {
-    Notify("DEBUG", "OnNewMail begin");
     CMOOSMsg &msg = *p;
-    string sval  = msg.GetString(); 
-    string key = msg.GetKey();
-
+    string key   = msg.GetKey();
+    string sval  = msg.GetString();     
 
 #if 0 // Keep these around just for template
     string comm  = msg.GetCommunity();
@@ -57,22 +45,24 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
     bool   mdbl  = msg.IsDouble();
     bool   mstr  = msg.IsString();
 #endif
+  
 
-    cout << "key=" << key << "sval=" << sval << endl;
+    if(key == "VISIT_POINT_GILDA"){
+      Notify("VISIT_POINT_GILDA_NEW", sval);
+    }
 
-    if (key == "VISIT_POINT_INIT"){
-      m_point_count++;
-      m_input.push_back(sval);
-      m_Comms.Notify("DEBUG", "test");
+    if(key == "VISIT_POINT_HENRY"){
+      Notify("VISIT_POINT_HENRY_NEW", sval);
     }
   }
-  return(true);
+	
+   return(true);
 }
-      
+
 //---------------------------------------------------------
 // Procedure: OnConnectToServer
 
-bool PointAssign::OnConnectToServer()
+bool Relayer::OnConnectToServer()
 {
    // register for variables here
    // possibly look at the mission file?
@@ -87,38 +77,8 @@ bool PointAssign::OnConnectToServer()
 // Procedure: Iterate()
 //            happens AppTick times per second
 
-bool PointAssign::Iterate()
+bool Relayer::Iterate()
 {
-  //AppCastingMOOSApp::Iterate();
-
-  if(REGIONAL_DISTRO){
-  }
-  else if(m_point_count > 101 && !m_distributed){
-    usleep(10000);
-    for(int i=0; i<102; i++){
-      if(i == 0){
-	Notify("VISIT_POINT_HENRY", m_input[i]);
-	Notify("TEST_POINT", "test");
-	Notify("VISITING_ALL", m_input[i]);
-	Notify("DEBUG", "first points notified");
-	
-      }
-      else if(i < 101){
-	if(i % 2 == 0){
-	  Notify("VISITING_HENRY", m_input[i]);
-	}
-	else{
-	  Notify("VISITING_GILDA", m_input[i]);
-	}
-	usleep(10000);
-      }
-      else{
-	Notify("VISITING_ALL", m_input[i]);
-      }
-    }
-    m_distributed = true;
-  }	
-  
   return(true);
 }
 
@@ -126,10 +86,8 @@ bool PointAssign::Iterate()
 // Procedure: OnStartUp()
 //            happens before connection is open
 
-bool PointAssign::OnStartUp()
+bool Relayer::OnStartUp()
 {
-  //AppCastingMOOSApp::OnStartUp();
-
   list<string> sParams;
   m_MissionReader.EnableVerbatimQuoting(false);
   if(m_MissionReader.GetConfiguration(GetAppName(), sParams)) {
@@ -148,27 +106,17 @@ bool PointAssign::OnStartUp()
     }
   }
   
-  RegisterVariables();
-  Notify("UTS_PAUSE", "false");
+  RegisterVariables();	
   return(true);
 }
 
 //---------------------------------------------------------
 // Procedure: RegisterVariables
 
-void PointAssign::RegisterVariables()
+void Relayer::RegisterVariables()
 {
-  //AppCastingMOOSApp::RegisterVariables();
-
   // Register("FOOBAR", 0);
-  Register("VISIT_POINT_INIT", 0);
+  Register("VISIT_POINT_HENRY", 0);
+  Register("VISIT_POINT_GILDA", 0);
 }
-/*
-bool PointAssign::buildReport()
-{
-  // m_msgs << "Number of good messages: " << m_good_message_count << endl;
-  //m_msgs << "Number of bad messages: " << m_bad_message_count << endl;
 
-  return true;
-}
-*/

@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/pPrimeFactor.dir/PrimeFactor.o CMakeFiles/pPrimeFactor.dir/PrimeFactor_Info.o CMakeFiles/pPrimeFactor.dir/main.o  -o pPrimeFactor -lmbutil -lm -lpthread 

@@ -21,6 +21,7 @@ Processconfig = ANTLER
   Run = pShare             @ NewConsole = false
   Run = pHostInfo          @ NewConsole = false
   Run = uFldNodeBroker     @ NewConsole = false
+  Run = pFaker		   @ NewConsole = false
 }
  
 #include plug_uSimMarine.moos
