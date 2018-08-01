@@ -28,6 +28,7 @@ class PointAssign : public CMOOSApp
  protected:
    void RegisterVariables();
    vector<string> m_input;
+   void postViewPoint(double x, double y, string label, string color);
 
  private: // Configuration variables
    int num = 0;

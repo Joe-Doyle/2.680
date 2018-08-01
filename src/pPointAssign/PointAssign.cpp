@@ -11,6 +11,7 @@
 #include "MBUtils.h"
 #include "PointAssign.h"
 #include <unistd.h>
+#include "XYPoint.h"
 
 using namespace std;
 
@@ -32,6 +33,17 @@ PointAssign::PointAssign()
 
 PointAssign::~PointAssign()
 {
+}
+
+void PointAssign::postViewPoint(double x, double y, string label, string color)
+{
+  XYPoint point(x, y);
+  point.set_label(label);
+  point.set_color("vertex", color);
+  point.set_param("vertex_size", "2");
+
+  string spec = point.get_spec();
+  Notify("VIEW_POINT", spec);
 }
 
 //---------------------------------------------------------
@@ -106,9 +118,17 @@ bool PointAssign::Iterate()
       else if(i < 101){
 	if(i % 2 == 0){
 	  Notify("VISITING_HENRY", m_input[i]);
+	  string x = tokStringParse(m_input[i], "x", ',', '=');
+	  string y = tokStringParse(m_input[i], "y", ',', '=');
+	  string id = tokStringParse(m_input[i], "id", ',', '=');
+	  postViewPoint(stod(x), stod(y), id, "red");
 	}
 	else{
 	  Notify("VISITING_GILDA", m_input[i]);
+	  string x = tokStringParse(m_input[i], "x", ',', '=');
+	  string y = tokStringParse(m_input[i], "y", ',', '=');
+	  string id = tokStringParse(m_input[i], "id", ',', '=');
+	  postViewPoint(stod(x), stod(y), id, "yellow");
 	}
 	usleep(10000);
       }
