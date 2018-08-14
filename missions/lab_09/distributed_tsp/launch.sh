@@ -2,7 +2,7 @@
 #-----------------------------------------------------------
 #  Part 1: Check for and handle command-line arguments
 #-----------------------------------------------------------
-TIME_WARP=20
+TIME_WARP=25
 JUST_MAKE="no"
 for ARGI; do
     if [ "${ARGI}" = "--help" -o "${ARGI}" = "-h" ] ; then

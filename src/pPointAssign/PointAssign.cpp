@@ -12,6 +12,7 @@
 #include "PointAssign.h"
 #include <unistd.h>
 #include "XYPoint.h"
+//#include <algorithm>
 
 using namespace std;
 
@@ -45,7 +46,11 @@ void PointAssign::postViewPoint(double x, double y, string label, string color)
   string spec = point.get_spec();
   Notify("VIEW_POINT", spec);
 }
-
+/*
+bool comp(const double& stod(tokStringParse(m_input[i], "x", ',', '=')), const double& stod(tokStringParse(m_input[i+1], "x", ',', '='))) {
+  return stod(tokStringParse(m_input[i], "x", ',', '=')) > stod(tokStringParse(m_input[i+1], "x", ',', '='));
+}
+*/
 //---------------------------------------------------------
 // Procedure: OnNewMail
 bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)

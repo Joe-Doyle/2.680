@@ -23,6 +23,7 @@ ADD_SUBDIRECTORY(pOdometry)
 ADD_SUBDIRECTORY(pPointAssign)
 ADD_SUBDIRECTORY(pFaker)
 ADD_SUBDIRECTORY(pRelayer)
+ADD_SUBDIRECTORY(pGenPath)
 ##############################################################################
 #                           END of CMakeLists.txt
 ##############################################################################
